@@ -12,6 +12,7 @@
 namespace Booking;
 
 use Cms\AbstractCmsModule;
+use Booking\Service\BookingService;
 
 final class Module extends AbstractCmsModule
 {
@@ -20,8 +21,10 @@ final class Module extends AbstractCmsModule
      */
     public function getServiceProviders()
     {
+        $bookingService = new BookingService();
+
         return array(
-            
+            'bookingService' => $bookingService
         );
     }
 }
