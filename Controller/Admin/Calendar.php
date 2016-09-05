@@ -27,10 +27,10 @@ final class Calendar extends AbstractController
     /**
      * Renders all bookings associated with a date
      * 
-     * @param string $time
+     * @param string $date
      * @return string
      */
-    public function viewAction($time)
+    public function viewAction($date)
     {
         
     }
