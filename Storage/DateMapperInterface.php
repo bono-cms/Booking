@@ -11,7 +11,7 @@
 
 namespace Booking\Storage;
 
-interface BookingMapperInterface
+interface DateMapperInterface
 {
     
 }
