@@ -12,15 +12,15 @@
 namespace Booking\Storage\MySQL;
 
 use Cms\Storage\MySQL\AbstractMapper;
-use Booking\Storage\TimeMapperInterface;
+use Booking\Storage\CalendarMapperInterface;
 
-final class TimeMapper extends AbstractMapper implements TimeMapperInterface
+final class CalendarMapper extends AbstractMapper implements TimeMapperInterface
 {
     /**
      * {@inheritDoc}
      */
     public static function getTableName()
     {
-        return self::getWithPrefix('bono_module_booking_time');
+        return self::getWithPrefix('bono_module_booking_calendar');
     }
 }

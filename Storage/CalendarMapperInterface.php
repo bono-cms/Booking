@@ -11,7 +11,6 @@
 
 namespace Booking\Storage;
 
-interface TimeMapperInterface
+interface CalendarMapperInterface
 {
-    
 }

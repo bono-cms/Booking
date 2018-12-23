@@ -21,8 +21,7 @@ final class Dropper extends AbstractStorageDropper
     protected function getTables()
     {
         return array(
-            DateMapper::getTableName(),
-            TimeMapper::getTableName()
+            CalendarMapper::getTableName()
         );
     }
 }
