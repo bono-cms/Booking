@@ -13,6 +13,7 @@ namespace Booking\Service;
 
 use Booking\Storage\CalendarMapperInterface;
 use Cms\Service\AbstractManager;
+use Krystal\Stdlib\VirtualEntity;
 
 final class CalendarService extends AbstractManager
 {
@@ -32,5 +33,71 @@ final class CalendarService extends AbstractManager
     public function __construct(CalendarMapperInterface $calendarMapper)
     {
         $this->calendarMapper = $calendarMapper;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    protected function toEntity(array $row)
+    {
+        $entity = new VirtualEntity();
+        $entity->setId($row['id'])
+               ->setStart($row['start'])
+               ->setEnd($row['end'])
+               ->setComment($row['comment']);
+
+        return $entity;
+    }
+
+    /**
+     * Returns last calendar ID
+     * 
+     * @return int
+     */
+    public function getLastId()
+    {
+        return $this->calendarMapper->getMaxId();
+    }
+
+    /**
+     * Fetches calendar item by its ID
+     * 
+     * @param int $id Calendar item ID
+     * @return array
+     */
+    public function fetchById($id)
+    {
+        return $this->prepareResult($this->calendarMapper->findByPk($id));
+    }
+
+    /**
+     * Fetch all calendar items
+     * 
+     * @return array
+     */
+    public function fetchAll()
+    {
+        return $this->prepareResults($this->calendarMapper->fetchAll());
+    }
+
+    /**
+     * Deletes calendar item by its ID
+     * 
+     * @return boolean
+     */
+    public function deleteById($id)
+    {
+        return $this->calendarMapper->deleteByPk($id);
+    }
+
+    /**
+     * Save calendar item
+     * 
+     * @param array $input
+     * @return boolen
+     */
+    public function save(array $input)
+    {
+        return $this->calendarMapper->persist($input);
     }
 }
