@@ -12,7 +12,7 @@
 namespace Booking;
 
 use Cms\AbstractCmsModule;
-use Booking\Service\BookingService;
+use Booking\Service\CalendarService;
 
 final class Module extends AbstractCmsModule
 {
@@ -21,10 +21,10 @@ final class Module extends AbstractCmsModule
      */
     public function getServiceProviders()
     {
-        $bookingService = new BookingService();
+        $calendarService = new CalendarService($this->getMapper('\Booking\Storage\MySQL\CalendarMapper'));
 
         return array(
-            'bookingService' => $bookingService
+            'calendarService' => $calendarService
         );
     }
 }
