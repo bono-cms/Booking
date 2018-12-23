@@ -23,4 +23,19 @@ final class CalendarMapper extends AbstractMapper implements TimeMapperInterface
     {
         return self::getWithPrefix('bono_module_booking_calendar');
     }
+
+    /**
+     * Fetch all calendar items
+     * 
+     * @return array
+     */
+    public function fetchAll()
+    {
+        $db = $this->db->select('*')
+                       ->from(self::getTableName())
+                       ->orderBy('id')
+                       ->desc();
+
+        return $db->queryAll();
+    }
 }

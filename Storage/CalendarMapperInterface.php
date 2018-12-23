@@ -13,4 +13,10 @@ namespace Booking\Storage;
 
 interface CalendarMapperInterface
 {
+    /**
+     * Fetch all calendar items
+     * 
+     * @return array
+     */
+    public function fetchAll();
 }
