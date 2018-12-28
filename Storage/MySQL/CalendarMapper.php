@@ -13,6 +13,7 @@ namespace Booking\Storage\MySQL;
 
 use Cms\Storage\MySQL\AbstractMapper;
 use Booking\Storage\CalendarMapperInterface;
+use Krystal\Db\Sql\RawSqlFragment;
 
 final class CalendarMapper extends AbstractMapper implements CalendarMapperInterface
 {
@@ -31,7 +32,16 @@ final class CalendarMapper extends AbstractMapper implements CalendarMapperInter
      */
     public function fetchAll()
     {
-        $db = $this->db->select('*')
+        // Columns to be selected
+        $columns = array(
+            'id',
+            'start',
+            'end',
+            'comment',
+            new RawSqlFragment('TIMEDIFF(`end`, `start`) AS duration')
+        );
+
+        $db = $this->db->select($columns)
                        ->from(self::getTableName())
                        ->orderBy('id')
                        ->desc();

@@ -44,7 +44,8 @@ final class CalendarService extends AbstractManager
         $entity->setId($row['id'])
                ->setStart($row['start'])
                ->setEnd($row['end'])
-               ->setComment($row['comment']);
+               ->setComment($row['comment'])
+               ->setDuration($row['duration']);
 
         return $entity;
     }
