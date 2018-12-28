@@ -14,7 +14,15 @@ return array(
         'controller' => 'Admin:Calendar@indexAction'
     ),
 
-    '/%s/module/booking/view/(:var)' => array(
-        'controller' => 'Admin:Calendar@viewAction'
+    '/%s/module/booking/edit/(:var)' => array(
+        'controller' => 'Admin:Calendar@editAction'
+    ),
+
+    '/%s/module/booking/delete/(:var)' => array(
+        'controller' => 'Admin:Calendar@deleteAction'
+    ),
+
+    '/%s/module/booking/save' => array(
+        'controller' => 'Admin:Calendar@saveAction'
     )
 );
