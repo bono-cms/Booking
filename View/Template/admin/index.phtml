@@ -1,0 +1,117 @@
+<?php
+
+use Krystal\Form\Element;
+use Krystal\Grid\Grid;
+use Cms\View\Icon;
+
+defined('KRYSTAL') or die;
+
+?>
+
+<div class="row">
+    <div class="col-lg-6">
+        <form>
+        <h2 class="page-header"><?php $this->show('Bookings'); ?> <small>(<?= count($calendar); ?>)</small></h2>
+
+        <?= Grid::render($calendar, array(
+            'tableClass' => 'table table-hover table-bordered table-striped table-condensed',
+            'rowAttributes' => array(
+                'class' => function($item) use ($entity){
+                    return $item->getId() == $entity->getId() ? 'info' : null;
+                }
+            ),
+
+            'columns' => array(
+                array(
+                    'column' => 'id',
+                    'label' => '#'
+                ),
+
+                array(
+                    'column' => 'start',
+                    'label' => 'Start date'
+                ),
+
+                array(
+                    'column' => 'end',
+                    'label' => 'End date'
+                ),
+
+                array(
+                    'column' => 'duration'
+                )
+            ),
+
+            'actions' => array(
+                'edit' => function($item){
+                    return Icon::edit(
+                        $this->url('Booking:Admin:Calendar@editAction', $item->getId()),
+                        $this->translate('Edit this item')
+                    );
+                },
+
+                'remove' => function($item){
+                    return Icon::remove(
+                        $this->url('Booking:Admin:Calendar@deleteAction', $item->getId()),
+                        $this->translate('Remove this item')
+                    );
+                }
+            )
+
+        ), $this->translator); ?>
+        </form>
+
+        <?php if (empty($calendar)): ?>
+        <div class="center-block">
+            <h2 class="text-center text-muted"><i class="glyphicon glyphicon-remove"></i> <?php $this->show('No items'); ?></h2>
+        </div>
+        <?php endif; ?>
+
+    </div>
+
+    <div class="col-lg-6">
+        <h2 class="page-header"><i class="glyphicon glyphicon-pencil"></i> <?php $this->show($entity->getId() ? 'Updated bookin' : 'Add new booking'); ?></h2>
+
+        <form data-group="item">
+            <div class="well">
+                <?php echo Element::hidden('item[id]', $entity->getId()); ?>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('Start date'); ?></label>
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <?php echo Element::text('item[start]', $entity->getStart(), array('class' => 'form-control', 'placeholder' => $this->translate('Start date'))); ?>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('End date'); ?></label>
+                    <div class="col-lg-10">
+                        <div class="input-group">
+                            <?php echo Element::text('item[end]', $entity->getEnd(), array('class' => 'form-control', 'placeholder' => $this->translate('End date'))); ?>
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-lg-2 control-label"><?php $this->show('Comment'); ?></label>
+                    <div class="col-lg-10">
+                        <?php echo Element::textarea('item[comment]', $entity->getComment(), array('class' => 'form-control')); ?>
+                    </div>
+                </div>
+            </div>
+
+            <?php $this->loadPartial('actions', array(
+                'new' => !$entity->getId(),
+                'add' => 'Booking:Admin:Calendar@indexAction',
+                'edit' => 'Booking:Admin:Calendar@editAction',
+                'save' => 'Booking:Admin:Calendar@saveAction',
+                'cancel' => 'Booking:Admin:Calendar@indexAction'
+            )); ?>
+
+        </form>
+    </div>
+</div>
