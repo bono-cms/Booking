@@ -14,6 +14,14 @@ namespace Booking\Storage;
 interface CalendarMapperInterface
 {
     /**
+     * Checks whether date and time available
+     * 
+     * @param string $datetime
+     * @return boolean
+     */
+    public function isAvailable($datetime);
+
+    /**
      * Fetch all calendar items
      * 
      * @return array

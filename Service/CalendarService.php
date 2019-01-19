@@ -54,6 +54,17 @@ final class CalendarService extends AbstractManager
     }
 
     /**
+     * Checks whether date and time available
+     * 
+     * @param string $datetime
+     * @return boolean
+     */
+    public function isAvailable($datetime)
+    {
+        return $this->calendarMapper->isAvailable($datetime);
+    }
+
+    /**
      * Returns last calendar ID
      * 
      * @return int

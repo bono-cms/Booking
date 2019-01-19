@@ -26,6 +26,22 @@ final class CalendarMapper extends AbstractMapper implements CalendarMapperInter
     }
 
     /**
+     * Checks whether date and time available
+     * 
+     * @param string $datetime
+     * @return boolean
+     */
+    public function isAvailable($datetime)
+    {
+        $db = $this->db->select()
+                       ->count('id')
+                       ->from(self::getTableName())
+                       ->whereNotBetween('start', 'end', $datetime);
+
+        return (bool) $db->queryScalar();
+    }
+
+    /**
      * Fetch all calendar items
      * 
      * @return array
