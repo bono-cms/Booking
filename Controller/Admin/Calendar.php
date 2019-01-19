@@ -42,7 +42,8 @@ final class Calendar extends AbstractController
 
         return $this->view->render('index', array(
             'calendar' => $calendar,
-            'entity' => $entity
+            'entity' => $entity,
+            'title' => $entity->getId() ? 'Updated booking' : 'Add new booking'
         ));
     }
 
