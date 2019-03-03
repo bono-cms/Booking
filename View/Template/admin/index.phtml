@@ -1,7 +1,7 @@
 <?php
 
 use Krystal\Form\Element;
-use Krystal\Grid\Grid;
+use Krystal\Widget\GridView\GridViewWidget;
 use Cms\View\Icon;
 
 defined('KRYSTAL') or die;
@@ -13,7 +13,7 @@ defined('KRYSTAL') or die;
         <form>
         <h2 class="page-header"><?php $this->show('Bookings'); ?> <small>(<?= count($calendar); ?>)</small></h2>
 
-        <?= Grid::render($calendar, array(
+        <?= $this->widget(new GridViewWidget($calendar, array(
             'tableClass' => 'table table-hover table-bordered table-striped table-condensed',
             'rowAttributes' => array(
                 'class' => function($item) use ($entity){
@@ -57,8 +57,7 @@ defined('KRYSTAL') or die;
                     );
                 }
             )
-
-        ), $this->translator); ?>
+        ))); ?>
         </form>
 
         <?php if (empty($calendar)): ?>
