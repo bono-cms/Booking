@@ -1,10 +1,20 @@
 <?php
 
+/**
+ * Module configuration container
+ */
+
 return array(
- 'name' => 'Booking',
- 'caption' => 'Booking',
- 'route' => 'Booking:Admin:Calendar@indexAction',
- 'icon' => 'fa fa-calendar fa-5x',
- 'order' => 10,
- 'description' => 'Booking module lets your visitors schedule various actions'
+    'name' => 'Booking',
+    'description' => 'Booking module lets your visitors schedule various actions',
+    'menu' => array(
+        'name' => 'Booking',
+        'icon' => 'fa fa-calendar fa-5x',
+        'items' => array(
+            array(
+                'route' => 'Booking:Admin:Calendar@indexAction',
+                'name' => 'View all bookings'
+            )
+        )
+    )
 );
